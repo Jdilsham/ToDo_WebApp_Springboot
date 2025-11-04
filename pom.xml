@@ -8,10 +8,10 @@
 		<version>3.5.7</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.in28minute.springboot</groupId>
-	<artifactId>myfirstwebapp</artifactId>
+	<groupId>com.springboot.webapp</groupId>
+	<artifactId>ToDo</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>myfirstwebapp</name>
+	<name>ToDo</name>
 	<description>Demo project for Spring Boot</description>
 	<url/>
 	<licenses>
