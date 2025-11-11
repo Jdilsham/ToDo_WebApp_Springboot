@@ -17,8 +17,5 @@ public class SayHellController {
         return "sayHello";
     }
 
-    @RequestMapping("login")
-    public String login() {
-        return "login";
-    }
+
 }
