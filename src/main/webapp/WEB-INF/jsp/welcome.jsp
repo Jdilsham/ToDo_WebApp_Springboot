@@ -35,7 +35,6 @@
     <h1>Welcome</h1>
 
     <p>Name: ${username}</p>
-    <p>Password: ${password}</p>
 </div>
 
 </body>

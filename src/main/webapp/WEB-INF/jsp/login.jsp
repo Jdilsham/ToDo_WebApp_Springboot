@@ -80,7 +80,7 @@
 
 <div class="card">
     <h2>Login</h2>
-
+    <pre>${error}</pre>
     <form method="POST">
         <label>Name</label>
         <input type="text" name="username" placeholder="Enter your name" required>
