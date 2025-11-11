@@ -4,5 +4,7 @@
 </head>
 <body>
     <p>Login</p>
+
+    <p>Name is: ${name}</p>
 </body>
 </html>
