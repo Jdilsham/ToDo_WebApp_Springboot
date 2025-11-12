@@ -1,12 +1,16 @@
 package com.springboot.webapp.ToDo.App;
 
 
+import jakarta.validation.constraints.Size;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class ToDo {
     private int id;
     private String username;
+
+    @Size(min=1,max=100)
     private String description;
     private LocalDate targetDate;
     private boolean done;

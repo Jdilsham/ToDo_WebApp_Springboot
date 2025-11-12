@@ -1,9 +1,10 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Login</title>
+    <title>Add ToDo</title>
     <style>
         /* ---------- Reset ---------- */
         * {
@@ -35,7 +36,6 @@
             mix-blend-mode: screen;
         }
 
-        /* Different bubble sizes and durations */
         .bubble:nth-child(1) {
             width: 100px; height: 100px;
             left: 10%; top: 20%;
@@ -71,7 +71,6 @@
             animation-delay: 4s;
         }
 
-        /* ---------- Bubble Motion Keyframes ---------- */
         @keyframes moveBubble {
             0% {
                 transform: translate(0, 0) scale(1) rotate(0deg);
@@ -95,11 +94,11 @@
             }
         }
 
-        /* ---------- Login Card ---------- */
+        /* ---------- Form Card ---------- */
         .card {
             background: rgba(255, 255, 255, 0.12);
-            padding: 40px 45px;
-            width: 350px;
+            padding: 40px 50px;
+            width: 400px;
             border-radius: 20px;
             backdrop-filter: blur(15px);
             box-shadow: 0 15px 40px rgba(0,0,0,0.3);
@@ -115,31 +114,23 @@
 
         .card h2 {
             margin-bottom: 20px;
-            font-size: 30px;
+            font-size: 28px;
             font-weight: 700;
             color: #fff;
-        }
-
-        pre {
-            color: #ffb3b3;
-            font-size: 14px;
-            text-align: center;
-            margin-bottom: 10px;
         }
 
         label {
             display: block;
             text-align: left;
-            margin-top: 14px;
-            font-size: 14px;
+            margin-top: 15px;
+            font-size: 15px;
             color: #fff;
-            letter-spacing: 0.3px;
         }
 
-        input {
+        input, textarea {
             width: 100%;
             padding: 12px;
-            margin-top: 6px;
+            margin-top: 8px;
             border-radius: 8px;
             border: none;
             background: rgba(255,255,255,0.25);
@@ -149,19 +140,25 @@
             transition: background 0.3s ease, transform 0.2s ease;
         }
 
-        input::placeholder {
+        textarea {
+            resize: none;
+            height: 80px;
+        }
+
+        input::placeholder, textarea::placeholder {
             color: #e0e0e0;
         }
 
-        input:focus {
+        input:focus, textarea:focus {
             background: rgba(255,255,255,0.35);
             transform: scale(1.02);
         }
 
-        button {
+        /* ---------- Buttons ---------- */
+        .btn {
             width: 100%;
             padding: 12px;
-            margin-top: 22px;
+            margin-top: 25px;
             background: linear-gradient(135deg, #6a11cb, #2575fc);
             border: none;
             border-radius: 8px;
@@ -174,10 +171,25 @@
             transition: all 0.3s ease;
         }
 
-        button:hover {
+        .btn:hover {
             background: linear-gradient(135deg, #2575fc, #6a11cb);
             box-shadow: 0 8px 25px rgba(106,17,203,0.5);
             transform: translateY(-2px);
+        }
+
+        /* ---------- Back Link ---------- */
+        .back-link {
+            display: block;
+            margin-top: 20px;
+            text-decoration: none;
+            color: #e0e0e0;
+            font-size: 14px;
+            transition: color 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: #fff;
+            text-decoration: underline;
         }
 
         /* ---------- Glow Border ---------- */
@@ -205,19 +217,24 @@
 <div class="bubble"></div>
 <div class="bubble"></div>
 
-<!-- Login Card -->
+<!-- Add ToDo Card -->
 <div class="card">
-    <h2>Login 🔐</h2>
-    <pre>${error}</pre>
-    <form method="POST">
-        <label>Username</label>
-        <input type="text" name="username" placeholder="Enter your name" required>
+    <h2>Add New ToDo ✍️</h2>
 
-        <label>Password</label>
-        <input type="password" name="password" placeholder="Enter your password" required>
+    <form:form method="POST" modelAttribute="todo">
+        <label>Description</label>
+        <form:textarea path="description" placeholder="Enter task details..." />
 
-        <button type="submit">Login</button>
-    </form>
+        <label>Target Date</label>
+        <form:input path="targetDate" type="date" required="true" />
+
+        <form:input path="id" type="hidden"/>
+        <form:input path="done" type="hidden"/>
+
+        <button type="submit" class="btn">Add ToDo</button>
+    </form:form>
+
+    <a href="list-totos" class="back-link">← Back to Dashboard</a>
 </div>
 
 </body>

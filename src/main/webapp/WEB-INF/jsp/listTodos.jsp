@@ -244,8 +244,13 @@
         </tbody>
     </table>
 
+    <div style="text-align:center; margin-top:30px;">
+        <a href="add-todo" class="btn">➕ Add ToDo</a>
+    </div>
+
+
     <div style="text-align:center;">
-        <a href="logout" class="btn">Logout</a>
+        <a href="login" class="btn">Logout</a>
     </div>
 </main>
 
