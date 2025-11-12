@@ -225,6 +225,7 @@
         <label>Description</label>
         <form:textarea path="description" placeholder="Enter task details..." />
 
+        <form:errors path="description"/>
         <label>Target Date</label>
         <form:input path="targetDate" type="date" required="true" />
 
