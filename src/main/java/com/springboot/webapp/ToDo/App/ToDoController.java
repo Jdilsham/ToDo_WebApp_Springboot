@@ -52,4 +52,22 @@ public class ToDoController {
         toDoService.deleteToDo(id);
         return "redirect:list-totos";
     }
+
+    @RequestMapping(value = "update-todo", method =  RequestMethod.GET)
+    public String showupdateTotos(@RequestParam int id, ModelMap model) {
+        ToDo todo = toDoService.findToDoById(id);
+        model.addAttribute("todo",todo);
+        return "addTodo";
+    }
+
+    @RequestMapping(value="update-todo", method = RequestMethod.POST)
+    public String updateToDo(ModelMap model, @Valid @ModelAttribute("todo") ToDo todo, BindingResult result) {
+        if (result.hasErrors()) {
+            return "addTodo";
+        }
+        String usrename = (String) model.get("usrename");
+        toDoService.updateToDo(todo);
+        return "redirect:list-totos";
+    }
+
 }

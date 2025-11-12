@@ -1,5 +1,6 @@
 package com.springboot.webapp.ToDo.App;
 
+import jakarta.validation.Valid;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.ModelMap;
 
@@ -39,5 +40,16 @@ public class ToDoService {
             return t.getId() == id;
         };
         toDos.removeIf(predicate);
+    }
+
+    public ToDo findToDoById(int id) {
+        Predicate<?super ToDo> predicate =t -> t.getId() == id;
+        ToDo todo = toDos.stream().filter(predicate).findFirst().get();
+        return todo;
+    }
+
+    public void updateToDo(@Valid ToDo todo){
+        deleteToDo(todo.getId());
+        toDos.add(todo);
     }
 }
