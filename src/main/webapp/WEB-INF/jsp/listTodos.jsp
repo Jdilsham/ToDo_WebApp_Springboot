@@ -6,14 +6,12 @@
     <meta charset="UTF-8">
     <title>ToDo Dashboard</title>
     <style>
-        /* ---------- Reset ---------- */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        /* ---------- Background (Blue Theme + Bubbles) ---------- */
         body {
             font-family: 'Poppins', sans-serif;
             background: linear-gradient(135deg, #6a11cb, #2575fc);
@@ -26,7 +24,6 @@
             position: relative;
         }
 
-        /* ---------- Floating Bubbles ---------- */
         .bubble {
             position: absolute;
             border-radius: 50%;
@@ -34,35 +31,11 @@
             animation: float 8s ease-in-out infinite;
         }
 
-        .bubble:nth-child(1) {
-            width: 120px; height: 120px;
-            top: 10%; left: 15%;
-            animation-duration: 9s;
-        }
-
-        .bubble:nth-child(2) {
-            width: 180px; height: 180px;
-            bottom: 15%; right: 10%;
-            animation-duration: 12s;
-        }
-
-        .bubble:nth-child(3) {
-            width: 90px; height: 90px;
-            top: 70%; left: 25%;
-            animation-duration: 10s;
-        }
-
-        .bubble:nth-child(4) {
-            width: 70px; height: 70px;
-            bottom: 25%; left: 10%;
-            animation-duration: 11s;
-        }
-
-        .bubble:nth-child(5) {
-            width: 200px; height: 200px;
-            top: 20%; right: 20%;
-            animation-duration: 13s;
-        }
+        .bubble:nth-child(1) { width: 120px; height: 120px; top: 10%; left: 15%; animation-duration: 9s; }
+        .bubble:nth-child(2) { width: 180px; height: 180px; bottom: 15%; right: 10%; animation-duration: 12s; }
+        .bubble:nth-child(3) { width: 90px; height: 90px; top: 70%; left: 25%; animation-duration: 10s; }
+        .bubble:nth-child(4) { width: 70px; height: 70px; bottom: 25%; left: 10%; animation-duration: 11s; }
+        .bubble:nth-child(5) { width: 200px; height: 200px; top: 20%; right: 20%; animation-duration: 13s; }
 
         @keyframes float {
             0% { transform: translateY(0) rotate(0deg); opacity: 0.6; }
@@ -70,7 +43,6 @@
             100% { transform: translateY(0) rotate(360deg); opacity: 0.6; }
         }
 
-        /* ---------- Header ---------- */
         header {
             width: 100%;
             background: rgba(255, 255, 255, 0.15);
@@ -81,13 +53,11 @@
             font-size: 26px;
             font-weight: 600;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            letter-spacing: 0.5px;
             position: sticky;
             top: 0;
             z-index: 10;
         }
 
-        /* ---------- Main Card ---------- */
         main {
             background: rgba(255, 255, 255, 0.12);
             backdrop-filter: blur(25px);
@@ -115,7 +85,6 @@
             text-shadow: 0 2px 6px rgba(0,0,0,0.3);
         }
 
-        /* ---------- Table ---------- */
         table {
             width: 100%;
             border-collapse: collapse;
@@ -140,66 +109,57 @@
             letter-spacing: 0.5px;
         }
 
-        tr:nth-child(even) {
-            background: rgba(255, 255, 255, 0.15);
-        }
+        tr:nth-child(even) { background: rgba(255, 255, 255, 0.15); }
+        tr:hover { background: rgba(255, 255, 255, 0.25); transition: background 0.3s ease; }
 
-        tr:hover {
-            background: rgba(255, 255, 255, 0.25);
-            transition: background 0.3s ease;
-        }
-
-        /* ---------- Column Widths ---------- */
         th:nth-child(1), td:nth-child(1) { width: 8%; }
-        th:nth-child(2), td:nth-child(2) { width: 40%; text-align: left; padding-left: 25px; }
-        th:nth-child(3), td:nth-child(3) { width: 25%; }
-        th:nth-child(4), td:nth-child(4) { width: 12%; }
-        th:nth-child(5), td:nth-child(5) { width: 15%; }
+        th:nth-child(2), td:nth-child(2) { width: 38%; text-align: left; padding-left: 25px; }
+        th:nth-child(3), td:nth-child(3) { width: 20%; }
+        th:nth-child(4), td:nth-child(4) { width: 14%; }
+        th:nth-child(5), td:nth-child(5) { width: 20%; }
 
-        /* ---------- Status Icons ---------- */
-        .status-true {
-            color: #7CFC00;
-            font-size: 20px;
-            text-shadow: 0 0 6px rgba(124,252,0,0.6);
+        .status-true { color: #7CFC00; font-size: 20px; text-shadow: 0 0 6px rgba(124,252,0,0.6); }
+        .status-false { color: #ff6b6b; font-size: 20px; text-shadow: 0 0 6px rgba(255,107,107,0.6); }
+
+        /* ---------- Action Buttons ---------- */
+        td.actions {
+            white-space: nowrap;
+            text-align: center;
         }
 
-        .status-false {
-            color: #ff6b6b;
-            font-size: 20px;
-            text-shadow: 0 0 6px rgba(255,107,107,0.6);
-        }
-
-        /* ---------- Delete Button ---------- */
-        /* ---------- Delete Button ---------- */
-        table .btn {
-            padding: 8px 18px;
+        .action-btn {
+            display: inline-block;
+            margin: 0 5px;
+            padding: 8px 16px;
             border-radius: 25px;
-            background: linear-gradient(135deg, #6a11cb, #2575fc);
-            color: #fff;
             font-weight: 600;
-            text-decoration: none;
             font-size: 14px;
-            letter-spacing: 0.3px;
-            box-shadow: 0 3px 15px rgba(37, 117, 252, 0.4);
+            color: #fff;
+            text-decoration: none;
             transition: all 0.3s ease;
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            box-shadow: 0 3px 15px rgba(37, 117, 252, 0.4);
         }
 
-        table .btn:hover {
-            background: linear-gradient(135deg, #ff416c, #ff4b2b); /* 🔥 Red gradient on hover */
+        /* Update Button */
+        .btn-update:hover {
+            background: linear-gradient(135deg, #00c9a7, #92fe9d); /* 🌿 Green hover */
+            box-shadow: 0 6px 25px rgba(0, 255, 153, 0.5);
+            transform: translateY(-2px) scale(1.05);
+        }
+
+        /* Delete Button */
+        .btn-delete:hover {
+            background: linear-gradient(135deg, #ff416c, #ff4b2b); /* 🔥 Red hover */
             box-shadow: 0 6px 25px rgba(255, 77, 77, 0.6);
             transform: translateY(-2px) scale(1.05);
         }
 
-
-
-        /* ---------- Footer Buttons ---------- */
-        /* ---------- Add ToDo Button ---------- */
-        .btn-add {
+        /* ---------- Add & Logout Buttons ---------- */
+        .btn-add, .btn-logout {
             display: inline-block;
-            margin-top: 25px;
             padding: 12px 28px;
-            background: linear-gradient(135deg, #2575fc, #6a11cb);
-            color: #fff;
+            margin-top: 25px;
             font-weight: 600;
             text-decoration: none;
             border-radius: 30px;
@@ -207,33 +167,20 @@
             transition: all 0.3s ease;
         }
 
+        .btn-add { background: linear-gradient(135deg, #2575fc, #6a11cb); }
         .btn-add:hover {
-            background: linear-gradient(135deg, #00c9a7, #92fe9d); /* 🌿 Mint-green hover */
+            background: linear-gradient(135deg, #00c9a7, #92fe9d);
             box-shadow: 0 8px 35px rgba(0, 255, 153, 0.5);
             transform: translateY(-2px) scale(1.05);
         }
 
-        /* ---------- Logout Button ---------- */
-        .btn-logout {
-            display: inline-block;
-            margin-top: 15px;
-            padding: 12px 28px;
-            background: linear-gradient(135deg, #2575fc, #6a11cb);
-            color: #fff;
-            font-weight: 600;
-            text-decoration: none;
-            border-radius: 30px;
-            box-shadow: 0 5px 20px rgba(37,117,252,0.4);
-            transition: all 0.3s ease;
-        }
-
+        .btn-logout { background: linear-gradient(135deg, #2575fc, #6a11cb); }
         .btn-logout:hover {
-            background: linear-gradient(135deg, #ff416c, #ff4b2b); /* 🚨 Red hover for logout */
+            background: linear-gradient(135deg, #ff416c, #ff4b2b);
             box-shadow: 0 8px 30px rgba(255, 77, 77, 0.6);
             transform: translateY(-2px) scale(1.05);
         }
 
-        /* ---------- Footer ---------- */
         footer {
             text-align: center;
             color: #dfe6f3;
@@ -241,28 +188,17 @@
             padding: 25px 0;
             margin-top: 50px;
             opacity: 0.9;
-            z-index: 2;
         }
     </style>
 </head>
+
 <body>
+<div class="bubble"></div><div class="bubble"></div><div class="bubble"></div><div class="bubble"></div><div class="bubble"></div>
 
-<!-- Floating Bubbles -->
-<div class="bubble"></div>
-<div class="bubble"></div>
-<div class="bubble"></div>
-<div class="bubble"></div>
-<div class="bubble"></div>
+<header>Welcome, ${username} 👋</header>
 
-<!-- Header -->
-<header>
-    Welcome, ${username} 👋
-</header>
-
-<!-- Main Content -->
 <main>
     <h3>Your ToDos 📋</h3>
-
     <table>
         <thead>
         <tr>
@@ -289,11 +225,10 @@
                         </c:otherwise>
                     </c:choose>
                 </td>
-                <td>
-                    <a href="delete-todo?id=${todo.id}" class="btn"
-                       onclick="return confirm('Are you sure you want to delete this task?');">
-                        Delete
-                    </a>
+                <td class="actions">
+                    <a href="update-todo?id=${todo.id}" class="action-btn btn-update">Update</a>
+                    <a href="delete-todo?id=${todo.id}" class="action-btn btn-delete"
+                       onclick="return confirm('Are you sure you want to delete this task?');">Delete</a>
                 </td>
             </tr>
         </c:forEach>
@@ -309,10 +244,6 @@
     </div>
 </main>
 
-<!-- Footer -->
-<footer>
-    © 2025 ToDo App — JANITHA DILSHAM 💙
-</footer>
-
+<footer>© 2025 ToDo App — JANITHA DILSHAM 💙</footer>
 </body>
 </html>
