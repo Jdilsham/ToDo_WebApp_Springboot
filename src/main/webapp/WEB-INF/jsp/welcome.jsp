@@ -35,6 +35,8 @@
     <h1>Welcome</h1>
 
     <p>Name: ${username}</p>
+
+    <p><a href="list-totos">Manege Your ToDos</a></p>
 </div>
 
 </body>

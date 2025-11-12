@@ -15,11 +15,11 @@ public class ToDoService {
         toDos.add(new ToDo(1,"in28minutes","Learn AWS",
                     LocalDate.now().plusYears(1),false));
 
-        toDos.add(new ToDo(1,"in28minutes","Learn DevOps",
-                LocalDate.now().plusYears(2),false));
+        toDos.add(new ToDo(2,"in28minutes","Learn DevOps",
+                LocalDate.now().plusYears(2),true));
 
-        toDos.add(new ToDo(1,"in28minutes","Learn K8s",
-                LocalDate.now().plusYears(3),false));
+        toDos.add(new ToDo(3,"in28minutes","Learn K8s",
+                LocalDate.now().plusYears(3),true));
     }
 
     public List<ToDo> findByUsername(String username) {

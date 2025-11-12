@@ -8,14 +8,14 @@ public class ToDo {
     private int id;
     private String username;
     private String description;
-    private LocalDateTime targetDate;
+    private LocalDate targetDate;
     private boolean done;
 
     public ToDo(int id, String username, String description, LocalDate targetDate, boolean done) {
         this.id = id;
         this.username = username;
         this.description = description;
-        this.targetDate = targetDate.atStartOfDay();
+        this.targetDate = targetDate;
         this.done = done;
     }
 
@@ -31,7 +31,7 @@ public class ToDo {
         return description;
     }
 
-    public LocalDateTime getTargetDate() {
+    public LocalDate getTargetDate() {
         return targetDate;
     }
 
@@ -51,7 +51,7 @@ public class ToDo {
         this.description = description;
     }
 
-    public void setTargetDate(LocalDateTime targetDate) {
+    public void setTargetDate(LocalDate targetDate) {
         this.targetDate = targetDate;
     }
 
