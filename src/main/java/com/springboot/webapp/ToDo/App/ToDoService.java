@@ -6,6 +6,7 @@ import org.springframework.ui.ModelMap;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
 
 @Service
 public class ToDoService {
@@ -31,5 +32,12 @@ public class ToDoService {
     public void addTodo(String username, String description, LocalDate targetDate, boolean done) {
         ToDo todo = new ToDo(++todoCount,username, description, targetDate, done);
         toDos.add(todo);
+    }
+
+    public void deleteToDo(int id) {
+        Predicate<?super ToDo> predicate = t -> {
+            return t.getId() == id;
+        };
+        toDos.removeIf(predicate);
     }
 }

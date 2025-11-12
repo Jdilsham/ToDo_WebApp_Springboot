@@ -87,16 +87,16 @@
             z-index: 10;
         }
 
-        /* ---------- Main Content Card ---------- */
+        /* ---------- Main Card ---------- */
         main {
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(20px);
-            border-radius: 20px;
-            padding: 40px;
+            background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(25px);
+            border-radius: 25px;
+            padding: 50px;
             width: 90%;
             max-width: 950px;
             margin-top: 50px;
-            box-shadow: 0 10px 35px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 10px 35px rgba(0, 0, 0, 0.35);
             animation: fadeIn 0.8s ease-in-out;
             z-index: 2;
         }
@@ -119,16 +119,17 @@
         table {
             width: 100%;
             border-collapse: collapse;
-            border-radius: 12px;
+            border-radius: 15px;
             overflow: hidden;
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
             background: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+            text-align: center;
         }
 
         th, td {
             padding: 14px 16px;
-            text-align: center;
             font-size: 16px;
+            vertical-align: middle;
         }
 
         th {
@@ -145,12 +146,15 @@
 
         tr:hover {
             background: rgba(255, 255, 255, 0.25);
-            transition: 0.3s ease;
+            transition: background 0.3s ease;
         }
 
-        td {
-            color: #fff;
-        }
+        /* ---------- Column Widths ---------- */
+        th:nth-child(1), td:nth-child(1) { width: 8%; }
+        th:nth-child(2), td:nth-child(2) { width: 40%; text-align: left; padding-left: 25px; }
+        th:nth-child(3), td:nth-child(3) { width: 25%; }
+        th:nth-child(4), td:nth-child(4) { width: 12%; }
+        th:nth-child(5), td:nth-child(5) { width: 15%; }
 
         /* ---------- Status Icons ---------- */
         .status-true {
@@ -165,8 +169,32 @@
             text-shadow: 0 0 6px rgba(255,107,107,0.6);
         }
 
-        /* ---------- Button ---------- */
-        .btn {
+        /* ---------- Delete Button ---------- */
+        /* ---------- Delete Button ---------- */
+        table .btn {
+            padding: 8px 18px;
+            border-radius: 25px;
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            color: #fff;
+            font-weight: 600;
+            text-decoration: none;
+            font-size: 14px;
+            letter-spacing: 0.3px;
+            box-shadow: 0 3px 15px rgba(37, 117, 252, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        table .btn:hover {
+            background: linear-gradient(135deg, #ff416c, #ff4b2b); /* 🔥 Red gradient on hover */
+            box-shadow: 0 6px 25px rgba(255, 77, 77, 0.6);
+            transform: translateY(-2px) scale(1.05);
+        }
+
+
+
+        /* ---------- Footer Buttons ---------- */
+        /* ---------- Add ToDo Button ---------- */
+        .btn-add {
             display: inline-block;
             margin-top: 25px;
             padding: 12px 28px;
@@ -179,9 +207,30 @@
             transition: all 0.3s ease;
         }
 
-        .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(37,117,252,0.6);
+        .btn-add:hover {
+            background: linear-gradient(135deg, #00c9a7, #92fe9d); /* 🌿 Mint-green hover */
+            box-shadow: 0 8px 35px rgba(0, 255, 153, 0.5);
+            transform: translateY(-2px) scale(1.05);
+        }
+
+        /* ---------- Logout Button ---------- */
+        .btn-logout {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 12px 28px;
+            background: linear-gradient(135deg, #2575fc, #6a11cb);
+            color: #fff;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 30px;
+            box-shadow: 0 5px 20px rgba(37,117,252,0.4);
+            transition: all 0.3s ease;
+        }
+
+        .btn-logout:hover {
+            background: linear-gradient(135deg, #ff416c, #ff4b2b); /* 🚨 Red hover for logout */
+            box-shadow: 0 8px 30px rgba(255, 77, 77, 0.6);
+            transform: translateY(-2px) scale(1.05);
         }
 
         /* ---------- Footer ---------- */
@@ -221,6 +270,7 @@
             <th>Description</th>
             <th>Target Date</th>
             <th>Is Done</th>
+            <th>Action</th>
         </tr>
         </thead>
         <tbody>
@@ -239,18 +289,23 @@
                         </c:otherwise>
                     </c:choose>
                 </td>
+                <td>
+                    <a href="delete-todo?id=${todo.id}" class="btn"
+                       onclick="return confirm('Are you sure you want to delete this task?');">
+                        Delete
+                    </a>
+                </td>
             </tr>
         </c:forEach>
         </tbody>
     </table>
 
     <div style="text-align:center; margin-top:30px;">
-        <a href="add-todo" class="btn">➕ Add ToDo</a>
+        <a href="add-todo" class="btn-add">➕ Add ToDo</a>
     </div>
 
-
     <div style="text-align:center;">
-        <a href="login" class="btn">Logout</a>
+        <a href="login" class="btn-logout">Logout</a>
     </div>
 </main>
 
