@@ -252,7 +252,6 @@
 
     <div style="text-align:center;">
         <form action="/perform_logout" method="POST">
-            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
             <button type="submit" class="btn-logout">Logout</button>
         </form>
     </div>

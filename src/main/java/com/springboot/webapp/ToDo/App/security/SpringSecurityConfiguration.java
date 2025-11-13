@@ -46,6 +46,12 @@ public class SpringSecurityConfiguration {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
+                .csrf(csrf -> csrf.disable())
+
+                .headers(headers -> headers
+                        .frameOptions(frame -> frame.disable())
+                )
+
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/login", "/css/**", "/WEB-INF/jsp/**").permitAll()
                         .anyRequest().authenticated()
@@ -65,4 +71,6 @@ public class SpringSecurityConfiguration {
 
         return http.build();
     }
+
+
 }
