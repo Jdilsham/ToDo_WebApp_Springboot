@@ -219,24 +219,33 @@
 
 <!-- Add ToDo Card -->
 <div class="card">
-    <h2>Add New ToDo ✍️</h2>
+    <h2>${todo.id == null || todo.id == 0 ? "Add New ToDo ✍️" : "Update ToDo ✏️"}</h2>
 
-    <form:form method="POST" modelAttribute="todo">
+    <form:form
+            method="POST"
+            modelAttribute="todo"
+            action="${todo.id == null ? '/add-todo' : '/update-todo'}">
+
         <label>Description</label>
         <form:textarea path="description" placeholder="Enter task details..." />
-
         <form:errors path="description"/>
+
         <label>Target Date</label>
         <form:input path="targetDate" type="date" required="true" />
 
+        <!-- Hidden fields -->
         <form:input path="id" type="hidden"/>
         <form:input path="done" type="hidden"/>
 
-        <button type="submit" class="btn">Add ToDo</button>
+        <button type="submit" class="btn">
+                ${todo.id == null || todo.id == 0 ? "Add ToDo" : "Update ToDo"}
+        </button>
+
     </form:form>
 
-    <a href="list-totos" class="back-link">← Back to Dashboard</a>
+    <a href="/list-totos" class="back-link">← Back to Dashboard</a>
 </div>
+
 
 </body>
 </html>

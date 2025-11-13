@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 public class ToDo {
     @Id
     @GeneratedValue
-    private int id;
+    private Integer id;
     private String username;
 
     @Size(min=10, message = "Enter atleast 10 characters")
@@ -23,7 +23,7 @@ public class ToDo {
     private LocalDate targetDate;
     private boolean done;
 
-    public ToDo(int id, String username, String description, LocalDate targetDate, boolean done) {
+    public ToDo(Integer id, String username, String description, LocalDate targetDate, boolean done) {
         this.id = id;
         this.username = username;
         this.description = description;
@@ -35,7 +35,7 @@ public class ToDo {
 
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -55,7 +55,7 @@ public class ToDo {
         return done;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

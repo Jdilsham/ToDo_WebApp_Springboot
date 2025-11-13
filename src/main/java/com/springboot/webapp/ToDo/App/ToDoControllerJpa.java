@@ -36,7 +36,7 @@ public class ToDoControllerJpa {
                                   org.springframework.security.core.Authentication authentication) {
 
         String username = authentication.getName();
-        ToDo todo = new ToDo(0, username, "", LocalDate.now(), false);
+        ToDo todo = new ToDo(null, username, "", LocalDate.now(), false);
 
         model.addAttribute("todo", todo);
         return "addTodo";
@@ -74,12 +74,14 @@ public class ToDoControllerJpa {
     }
 
     @PostMapping("update-todo")
-    public String updateToDo(@Valid @ModelAttribute("todo") ToDo todo,
+    public String updateToDo(@Valid @ModelAttribute("todo") ToDo todo,  org.springframework.security.core.Authentication authentication,
                              BindingResult result) {
 
         if (result.hasErrors()) {
             return "addTodo";
         }
+        String username = authentication.getName();
+        todo.setUsername(username);
         todoRepository.save(todo);
         return "redirect:list-totos";
     }
