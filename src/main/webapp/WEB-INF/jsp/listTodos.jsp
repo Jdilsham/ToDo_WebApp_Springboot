@@ -189,6 +189,17 @@
             margin-top: 50px;
             opacity: 0.9;
         }
+
+        button {
+            border: none;
+            outline: none;
+        }
+
+        button:focus {
+            outline: none;
+            box-shadow: none;
+        }
+
     </style>
 </head>
 
@@ -240,7 +251,10 @@
     </div>
 
     <div style="text-align:center;">
-        <a href="/perform_logout" class="btn-logout">Logout</a>
+        <form action="/perform_logout" method="POST">
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+            <button type="submit" class="btn-logout">Logout</button>
+        </form>
     </div>
 </main>
 
