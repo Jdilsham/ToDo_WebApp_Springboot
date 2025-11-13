@@ -16,13 +16,13 @@ public class ToDoService {
     private static int todoCount = 0;
 
     static{
-        toDos.add(new ToDo(++todoCount,"admin","Learn AWS",
+        toDos.add(new ToDo(++todoCount,"admin","Learn AWS 1",
                     LocalDate.now().plusYears(1),false));
 
-        toDos.add(new ToDo(++todoCount,"jani","Learn DevOps",
+        toDos.add(new ToDo(++todoCount,"jani","Learn DevOps 1",
                 LocalDate.now().plusYears(2),true));
 
-        toDos.add(new ToDo(++todoCount,"in28minutes","Learn K8s",
+        toDos.add(new ToDo(++todoCount,"in28minutes","Learn K8s 1",
                 LocalDate.now().plusYears(3),true));
     }
 

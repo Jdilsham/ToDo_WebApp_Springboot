@@ -31,6 +31,10 @@ public class ToDo {
         this.done = done;
     }
 
+    public ToDo() {
+
+    }
+
     public int getId() {
         return id;
     }

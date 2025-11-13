@@ -6,25 +6,26 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+
 import java.time.LocalDate;
 import java.util.List;
 
-//@Controller
-public class ToDoController {
+@Controller
+public class ToDoControllerJpa {
 
-    private ToDoService toDoService;
-
-    //@Autowired
-    public ToDoController(ToDoService toDoService) {
-        this.toDoService = toDoService;
+    @Autowired
+    public ToDoControllerJpa(TodoRepository todoRepository) {
+        this.todoRepository = todoRepository;
     }
+
+    private TodoRepository todoRepository;
 
     @RequestMapping("list-totos")
     public String listAllTotos(ModelMap model,
                                org.springframework.security.core.Authentication authentication) {
 
         String username = authentication.getName();
-        List<ToDo> todos = toDoService.findByUsername(username);
+        List<ToDo> todos = todoRepository.findByUsername(username);
         model.addAttribute("todos", todos);
 
         return "listTodos";
@@ -51,21 +52,22 @@ public class ToDoController {
         }
 
         String username = authentication.getName();
-        toDoService.addTodo(username, todo.getDescription(), todo.getTargetDate(), false);
+        todo.setUsername(username);
+        todoRepository.save(todo);
 
         return "redirect:list-totos";
     }
 
     @RequestMapping("delete-todo")
     public String deleteTotos(@RequestParam int id) {
-        toDoService.deleteToDo(id);
+        todoRepository.deleteById(id);
         return "redirect:list-totos";
     }
 
     @GetMapping("update-todo")
     public String showUpdateTotos(@RequestParam int id, ModelMap model) {
 
-        ToDo todo = toDoService.findToDoById(id);
+        ToDo todo = todoRepository.findById(id).get();
         model.addAttribute("todo", todo);
 
         return "addTodo";
@@ -78,8 +80,7 @@ public class ToDoController {
         if (result.hasErrors()) {
             return "addTodo";
         }
-
-        toDoService.updateToDo(todo);
+        todoRepository.save(todo);
         return "redirect:list-totos";
     }
 }

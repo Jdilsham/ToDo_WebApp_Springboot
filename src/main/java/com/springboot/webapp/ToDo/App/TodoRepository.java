@@ -1,4 +1,9 @@
 package com.springboot.webapp.ToDo.App;
 
-public interface TodoRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import java.util.List;
+
+public interface TodoRepository extends JpaRepository<ToDo, Integer> {
+    public List<ToDo> findByUsername(String username);
 }
