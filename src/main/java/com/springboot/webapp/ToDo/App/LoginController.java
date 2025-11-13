@@ -6,13 +6,12 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@SessionAttributes("username")
 public class LoginController {
 
-    @GetMapping("/")
-    public String home() {
-        return "redirect:/login";
-    }
+//    @GetMapping("/")
+//    public String home() {
+//        return "redirect:/login";
+//    }
 
     @GetMapping("/login")
     public String showLoginPage(ModelMap model,
