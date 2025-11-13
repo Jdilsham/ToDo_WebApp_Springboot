@@ -16,10 +16,10 @@ public class ToDoService {
     private static int todoCount = 0;
 
     static{
-        toDos.add(new ToDo(++todoCount,"in28minutes","Learn AWS",
+        toDos.add(new ToDo(++todoCount,"admin","Learn AWS",
                     LocalDate.now().plusYears(1),false));
 
-        toDos.add(new ToDo(++todoCount,"in28minutes","Learn DevOps",
+        toDos.add(new ToDo(++todoCount,"jani","Learn DevOps",
                 LocalDate.now().plusYears(2),true));
 
         toDos.add(new ToDo(++todoCount,"in28minutes","Learn K8s",
@@ -27,7 +27,9 @@ public class ToDoService {
     }
 
     public List<ToDo> findByUsername(String username) {
-        return toDos;
+        return toDos.stream()
+                .filter(todo -> todo.getUsername().equals(username))
+                .toList();
     }
 
     public void addTodo(String username, String description, LocalDate targetDate, boolean done) {

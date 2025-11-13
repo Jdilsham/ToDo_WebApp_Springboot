@@ -8,11 +8,6 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 public class LoginController {
 
-//    @GetMapping("/")
-//    public String home() {
-//        return "redirect:/login";
-//    }
-
     @GetMapping("/login")
     public String showLoginPage(ModelMap model,
                                 @RequestParam(value = "error", required = false) String error) {

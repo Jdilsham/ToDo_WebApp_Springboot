@@ -11,18 +11,31 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
+import java.util.function.Function;
+
 @Configuration
 @EnableWebSecurity
 public class SpringSecurityConfiguration {
 
     @Bean
     public InMemoryUserDetailsManager createUserDetailsManager() {
+
+        UserDetails user1 = createNewUser("admin", "admin");
+        UserDetails user2 = createNewUser("jani", "111");
+
+        return new InMemoryUserDetailsManager(user1, user2);
+    }
+
+    private UserDetails createNewUser(String username, String password) {
+        Function<String, String>passwordEncorder
+                = input -> passwordEncoder().encode(input);
+
         UserDetails user = User.builder()
-                .username("admin")
-                .password(passwordEncoder().encode("admin"))
-                .roles("ADMIN")
+                .username(username)
+                .password(passwordEncoder().encode(password))
+                .roles("ADMIN", "USER")
                 .build();
-        return new InMemoryUserDetailsManager(user);
+        return user;
     }
 
     @Bean
