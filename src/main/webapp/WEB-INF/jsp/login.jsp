@@ -209,7 +209,16 @@
 <div class="card">
     <h2>Login 🔐</h2>
     <pre>${error}</pre>
-    <form method="POST">
+    <form action="/login" method="POST">
+
+        <c:if test="${not empty errorMessage}">
+            <div style="color: red; font-weight: bold; margin-bottom: 10px;">
+                    ${errorMessage}
+            </div>
+        </c:if>
+
+        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+
         <label>Username</label>
         <input type="text" name="username" placeholder="Enter your name" required>
 

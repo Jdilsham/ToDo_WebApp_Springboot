@@ -3,18 +3,23 @@ package com.springboot.webapp.ToDo.App;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @SessionAttributes("username")
 public class LoginController {
 
-    @RequestMapping(value= "/", method = RequestMethod.GET)
-    public String gotoLoginPage(ModelMap model) {
-        model.put("username", "janitha");
+    @GetMapping("/")
+    public String home() {
+        return "redirect:/login";
+    }
+
+    @GetMapping("/login")
+    public String showLoginPage(ModelMap model,
+                                @RequestParam(value = "error", required = false) String error) {
+        if (error != null) {
+            model.put("errorMessage", "Invalid username or password!");
+        }
         return "login";
     }
 

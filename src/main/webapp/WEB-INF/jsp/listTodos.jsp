@@ -240,7 +240,7 @@
     </div>
 
     <div style="text-align:center;">
-        <a href="login" class="btn-logout">Logout</a>
+        <a href="/logout" class="btn-logout">Logout</a>
     </div>
 </main>
 
