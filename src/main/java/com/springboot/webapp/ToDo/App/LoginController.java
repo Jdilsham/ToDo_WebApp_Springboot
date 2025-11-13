@@ -12,29 +12,10 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 @SessionAttributes("username")
 public class LoginController {
 
-
-    private AuthenticationService authentication;
-
-    @Autowired
-    public LoginController(AuthenticationService authentication) {
-        this.authentication = authentication;
-    }
-
-    @RequestMapping(value= "login", method = RequestMethod.GET)
-    public String gotoLoginPage() {
+    @RequestMapping(value= "/", method = RequestMethod.GET)
+    public String gotoLoginPage(ModelMap model) {
+        model.put("username", "janitha");
         return "login";
     }
 
-    @RequestMapping(value= "login", method = RequestMethod.POST)
-    public String gotoWelcomePage(@RequestParam String username, @RequestParam String password, ModelMap model) {
-
-        if (authentication.authenticate(username, password)) {
-            model.put("username", username);
-            return "welcome";
-        }else{
-            model.put("error", "Wrong Username or Password");
-            return "login";
-
-        }
-    }
 }
