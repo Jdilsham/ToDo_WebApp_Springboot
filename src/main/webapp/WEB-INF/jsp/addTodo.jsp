@@ -219,7 +219,7 @@
 
 <!-- Add ToDo Card -->
 <div class="card">
-    <h2>${todo.id == null || todo.id == 0 ? "Add New ToDo ✍️" : "Update ToDo ✏️"}</h2>
+    <h2>${todo.id == null ? "Add New ToDo ✍️" : "Update ToDo ✏️"}</h2>
 
     <form:form
             method="POST"
@@ -238,7 +238,7 @@
         <form:input path="done" type="hidden"/>
 
         <button type="submit" class="btn">
-                ${todo.id == null || todo.id == 0 ? "Add ToDo" : "Update ToDo"}
+                ${todo.id == null ? "Add ToDo" : "Update ToDo"}
         </button>
 
     </form:form>
