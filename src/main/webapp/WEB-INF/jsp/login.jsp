@@ -208,7 +208,6 @@
 <!-- Login Card -->
 <div class="card">
     <h2>Login 🔐</h2>
-    <pre>${error}</pre>
     <form action="/perform_login" method="POST">
         <c:if test="${not empty errorMessage}">
             <div style="color: red; font-weight: bold; margin-bottom: 10px;">
