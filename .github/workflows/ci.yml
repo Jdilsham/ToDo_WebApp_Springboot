@@ -37,10 +37,10 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Build Docker Image
-        run: docker build -t ${{ secrets.DOCKER_USERNAME }}/todo-app:${{ github.sha }} .
+        run: docker build -t ${{ secrets.DOCKER_USERNAME }}/spring-todo-app:${{ github.sha }} .
 
       - name: Push Docker Image
-        run: docker push ${{ secrets.DOCKER_USERNAME }}/todo-app:${{ github.sha }}
+        run: docker push ${{ secrets.DOCKER_USERNAME }}/spring-todo-app:${{ github.sha }}
 
       - name: Expose Docker Image as Artifact
-        run: echo "image=${{ secrets.DOCKER_USERNAME }}/todo-app:${{ github.sha }}" >> $GITHUB_ENV
+        run: echo "image=${{ secrets.DOCKER_USERNAME }}/spring-todo-app:${{ github.sha }}" >> $GITHUB_ENV
