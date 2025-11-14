@@ -23,11 +23,11 @@ pipeline{
 				script {
 					echo "Loading Image into Minikube..."
 					sh """
-						# Use Minikube's Docker environment
+						# Use Minikube Docker daemon
 						eval \$(minikube -p minikube docker-env)
 
-						# Load the image into Minikube’s internal Docker registry
-						minikube image load ${IMAGE_NAME}:${GIT_COMMIT}
+						# Pull the image again into Minikube's Docker daemon
+						docker pull ${IMAGE_NAME}:${GIT_COMMIT}
 					"""
 				}
 			}
