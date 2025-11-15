@@ -1,39 +1,26 @@
-pipeline{
+pipeline {
 	agent any
 
 	environment {
 		IMAGE_NAME = "janithad/spring-todo-app"
+		NAMESPACE = "todo-app"
 	}
 
 	stages {
 
-		stage('Pull Docker Image') {
+		stage('Update Deployment Image Tag') {
 			steps {
 				script {
-					retry(5) {
-						echo "Trying to pull Docker image..."
-						sh "docker pull ${IMAGE_NAME}:${GIT_COMMIT}"
-					}
-				}
-			}
-		}
+					echo "Replacing IMAGE_TAG with ${GIT_COMMIT} in deployment.yaml..."
 
-		stage('Load Image into Minikube') {
-			steps {
-				script {
-					echo "Loading Image into Minikube..."
 					sh """
-						# Use Minikube Docker daemon
-						eval \$(minikube -p minikube docker-env)
-
-						# Pull the image again into Minikube's Docker daemon
-						docker pull ${IMAGE_NAME}:${GIT_COMMIT}
-					"""
+                        sed -i 's|IMAGE_TAG|${GIT_COMMIT}|g' k8s/deployment.yaml
+                    """
 				}
 			}
 		}
 
-		stage('Deploy Kubernetes Manifests'){
+		stage('Deploy Kubernetes Manifests') {
 			steps {
 				script {
 					echo "Applying Kubernetes manifests from k8s/ folder..."
@@ -42,11 +29,11 @@ pipeline{
 			}
 		}
 
-		stage('Restart ToDo App Deployment') {
+		stage('Restart Deployment') {
 			steps {
 				script {
-					echo "Restarting ToDo App Deployment..."
-					sh "kubectl rollout restart deployment spring-todo-app"
+					echo "Restarting deployment..."
+					sh "kubectl rollout restart deployment spring-todo-app -n ${NAMESPACE}"
 				}
 			}
 		}
@@ -55,7 +42,7 @@ pipeline{
 			steps {
 				script {
 					echo "Checking rollout status..."
-					sh "kubectl rollout status deployment spring-todo-app"
+					sh "kubectl rollout status deployment spring-todo-app -n ${NAMESPACE}"
 				}
 			}
 		}
@@ -63,7 +50,7 @@ pipeline{
 
 	post {
 		success {
-			echo "ToDo App deployed successfully to Minikube!"
+			echo "ToDo App deployed successfully to Minikube using Docker Hub image!"
 		}
 		failure {
 			echo "Deployment failed. Check logs in Jenkins console."
