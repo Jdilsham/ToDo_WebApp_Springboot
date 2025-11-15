@@ -14,7 +14,7 @@ pipeline {
 					echo "Replacing IMAGE_TAG with ${GIT_COMMIT} in deployment.yaml..."
 
 					sh """
-                        sed -i 's|IMAGE_TAG|${GIT_COMMIT}|g' k8s/deployment.yaml
+                        sed -i 's|IMAGE_TAG|${GIT_COMMIT}|g' k8s/backend-deployment.yaml
                     """
 				}
 			}
