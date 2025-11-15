@@ -64,3 +64,15 @@ spec:
                 secretKeyRef:
                   name: mysql-secret
                   key: password
+
+            - name: SPRING_MVC_VIEW_PREFIX
+              valueFrom:
+                configMapKeyRef:
+                  name: backend-config
+                  key: SPRING_MVC_VIEW_PREFIX
+
+            - name: SPRING_MVC_VIEW_SUFFIX
+              valueFrom:
+                configMapKeyRef:
+                  name: backend-config
+                  key: SPRING_MVC_VIEW_SUFFIX
