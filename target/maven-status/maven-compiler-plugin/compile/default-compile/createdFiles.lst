@@ -1,7 +1,0 @@
-com/springboot/webapp/ToDo/App/WelcomeController.class
-com/springboot/webapp/ToDo/App/ToDoControllerJpa.class
-com/springboot/webapp/ToDo/App/security/SpringSecurityConfiguration.class
-com/springboot/webapp/ToDo/App/LoginController.class
-com/springboot/webapp/ToDo/App/TodoRepository.class
-com/springboot/webapp/ToDo/App/ToDo.class
-com/springboot/webapp/ToDo/ToDoApplication.class
