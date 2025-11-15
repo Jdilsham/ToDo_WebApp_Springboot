@@ -1,17 +1,9 @@
-FROM eclipse-temurin:21-jdk-alpine AS build
+ARG WAR_FILE=ToDo-0.0.1-SNAPSHOT.war
 
-WORKDIR /app
+FROM tomcat:10-jdk17
 
-COPY . .
+RUN rm -rf /usr/local/tomcat/webapps/*
 
-RUN ./mvnw clean package -DskipTests
-
-FROM eclipse-temurin:21-jre
-
-WORKDIR /app
-
-COPY --from=build /app/target/*.jar app.jar
+COPY target/${WAR_FILE} /usr/local/tomcat/webapps/ROOT.war
 
 EXPOSE 8080
-
-ENTRYPOINT ["java", "-jar", "app.jar"]
