@@ -51,7 +51,9 @@ public class SpringSecurityConfiguration {
                         .frameOptions(frame -> frame.disable())
                 )
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/login", "/perform_login", "/error", "/css/**", "/js/**", "/webjars/**").permitAll()
+                        .requestMatchers("/", "/login", "/perform_login", "/error",
+                                "/css/**", "/js/**", "/webjars/**")
+                        .permitAll()
                         .anyRequest().authenticated()
                 )
                 .formLogin(form -> form
