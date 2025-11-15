@@ -47,13 +47,11 @@ public class SpringSecurityConfiguration {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .csrf(csrf -> csrf.disable())
-
                 .headers(headers -> headers
                         .frameOptions(frame -> frame.disable())
                 )
-
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/login", "/css/**", "/WEB-INF/jsp/**").permitAll()
+                        .requestMatchers("/login", "/perform_login", "/error", "/css/**", "/js/**", "/webjars/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .formLogin(form -> form
@@ -71,6 +69,7 @@ public class SpringSecurityConfiguration {
 
         return http.build();
     }
+
 
 
 }
