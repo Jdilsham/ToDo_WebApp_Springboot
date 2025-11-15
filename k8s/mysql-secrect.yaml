@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: mysql-secret
+  namespace: todo-app
+type: Opaque
+data:
+  username: dG9kb191c2Vy
+  password: dG9kb19wYXNz
+  database: dG9kb19kYg==
