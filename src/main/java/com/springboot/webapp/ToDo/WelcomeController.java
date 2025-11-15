@@ -1,4 +1,4 @@
-package com.springboot.webapp.ToDo.App;
+package com.springboot.webapp.ToDo;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;

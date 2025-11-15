@@ -1,4 +1,4 @@
-package com.springboot.webapp.ToDo.App;
+package com.springboot.webapp.ToDo;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

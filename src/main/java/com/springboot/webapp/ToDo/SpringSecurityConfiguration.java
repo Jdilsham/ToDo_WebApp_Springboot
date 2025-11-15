@@ -1,4 +1,4 @@
-package com.springboot.webapp.ToDo.App.security;
+package com.springboot.webapp.ToDo;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

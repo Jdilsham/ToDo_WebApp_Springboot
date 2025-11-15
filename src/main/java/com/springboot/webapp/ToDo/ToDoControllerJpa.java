@@ -1,4 +1,4 @@
-package com.springboot.webapp.ToDo.App;
+package com.springboot.webapp.ToDo;
 
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;

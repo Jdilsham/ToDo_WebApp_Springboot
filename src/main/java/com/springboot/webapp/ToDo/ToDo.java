@@ -1,15 +1,12 @@
-package com.springboot.webapp.ToDo.App;
+package com.springboot.webapp.ToDo;
 
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 @Entity(name= "TodoDB")
 public class ToDo {
