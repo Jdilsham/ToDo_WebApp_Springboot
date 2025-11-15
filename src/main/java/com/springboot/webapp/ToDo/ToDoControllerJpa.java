@@ -21,7 +21,7 @@ public class ToDoControllerJpa {
 
     private TodoRepository todoRepository;
 
-    @RequestMapping("list-totos")
+    @RequestMapping("list-todos")
     public String listAllTotos(ModelMap model,
                                org.springframework.security.core.Authentication authentication) {
 
@@ -56,13 +56,13 @@ public class ToDoControllerJpa {
         todo.setUsername(username);
         todoRepository.save(todo);
 
-        return "redirect:list-totos";
+        return "redirect:list-todos";
     }
 
     @RequestMapping("delete-todo")
     public String deleteTotos(@RequestParam int id) {
         todoRepository.deleteById(id);
-        return "redirect:list-totos";
+        return "redirect:list-todos";
     }
 
     @GetMapping("update-todo")
@@ -84,6 +84,6 @@ public class ToDoControllerJpa {
         String username = authentication.getName();
         todo.setUsername(username);
         todoRepository.save(todo);
-        return "redirect:list-totos";
+        return "redirect:list-todos";
     }
 }
