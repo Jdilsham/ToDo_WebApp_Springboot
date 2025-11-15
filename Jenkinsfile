@@ -4,36 +4,41 @@ pipeline {
 	environment {
 		IMAGE_NAME = "janithad/spring-todo-app"
 		NAMESPACE = "todo-app"
+		KUBECONFIG = "/var/lib/jenkins/.kube/config"
 	}
 
 	stages {
 
-		stage('Update Deployment Image Tag') {
+		stage('Prepare Updated Deployment File') {
 			steps {
 				script {
-					echo "Replacing IMAGE_TAG with ${GIT_COMMIT} in deployment.yaml..."
+					echo "Preparing deployment with image tag ${GIT_COMMIT}..."
 
 					sh """
-                        sed -i 's|IMAGE_TAG|${GIT_COMMIT}|g' k8s/backend-deployment.yaml
+                        cp k8s/backend-deployment.yaml k8s/backend-deployment-temp.yaml
+                        sed -i 's|IMAGE_TAG|${GIT_COMMIT}|g' k8s/backend-deployment-temp.yaml
                     """
 				}
 			}
 		}
 
-		stage('Deploy Kubernetes Manifests') {
+		stage('Apply Kubernetes Manifests') {
 			steps {
 				script {
-					echo "Applying Kubernetes manifests from k8s/ folder..."
-					sh "kubectl apply -f k8s/"
-				}
-			}
-		}
+					echo "Applying all manifests..."
 
-		stage('Restart Deployment') {
-			steps {
-				script {
-					echo "Restarting deployment..."
-					sh "kubectl rollout restart deployment spring-todo-app -n ${NAMESPACE}"
+					sh """
+                        kubectl apply -f k8s/namespace.yaml
+                        kubectl apply -f k8s/mysql-secret.yaml
+                        kubectl apply -f k8s/mysql-pvc.yaml
+                        kubectl apply -f k8s/mysql-deployment.yaml
+                        kubectl apply -f k8s/mysql-service.yaml
+                        kubectl apply -f k8s/backend-configmap.yaml
+                        kubectl apply -f k8s/backend-service.yaml
+                        kubectl apply -f k8s/ingress.yaml
+
+                        kubectl apply -f k8s/backend-deployment-temp.yaml
+                    """
 				}
 			}
 		}
@@ -41,8 +46,8 @@ pipeline {
 		stage('Verify Deployment Status') {
 			steps {
 				script {
-					echo "Checking rollout status..."
-					sh "kubectl rollout status deployment spring-todo-app -n ${NAMESPACE}"
+					echo "Verifying rollout..."
+					sh "kubectl rollout status deployment/spring-todo-app -n ${NAMESPACE}"
 				}
 			}
 		}
@@ -50,10 +55,10 @@ pipeline {
 
 	post {
 		success {
-			echo "ToDo App deployed successfully to Minikube using Docker Hub image!"
+			echo "ToDo App deployed successfully to Minikube!"
 		}
 		failure {
-			echo "Deployment failed. Check logs in Jenkins console."
+			echo "Deployment failed. Check Jenkins logs."
 		}
 	}
 }
