@@ -20,17 +20,35 @@ spec:
           ports:
             - containerPort: 8080
           env:
+            - name: SPRING_PROFILES_ACTIVE
+              valueFrom:
+                configMapKeyRef:
+                  name: backend-config
+                  key: SPRING_PROFILES_ACTIVE
+
             - name: SPRING_JPA_HIBERNATE_DDL_AUTO
               valueFrom:
                 configMapKeyRef:
                   name: backend-config
                   key: SPRING_JPA_HIBERNATE_DDL_AUTO
 
-            - name: SPRING_PROFILES_ACTIVE
+            - name: SPRING_JPA_SHOW_SQL
               valueFrom:
                 configMapKeyRef:
                   name: backend-config
-                  key: SPRING_PROFILES_ACTIVE
+                  key: SPRING_JPA_SHOW_SQL
+
+            - name: SPRING_JPA_DEFER_DATASOURCE_INITIALIZATION
+              valueFrom:
+                configMapKeyRef:
+                  name: backend-config
+                  key: SPRING_JPA_DEFER_DATASOURCE_INITIALIZATION
+
+            - name: SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT
+              valueFrom:
+                configMapKeyRef:
+                  name: backend-config
+                  key: SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT
 
             - name: SPRING_DATASOURCE_URL
               value: jdbc:mysql://mysql:3306/todo_db
