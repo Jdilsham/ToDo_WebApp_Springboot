@@ -2,17 +2,21 @@ package com.springboot.webapp.ToDo;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 @Configuration
 public class ViewResolverConfig {
 
     @Bean
-    public InternalResourceViewResolver jspViewResolver() {
+    public ViewResolver internalResourceViewResolver() {
         InternalResourceViewResolver resolver = new InternalResourceViewResolver();
         resolver.setPrefix("/WEB-INF/jsp/");
         resolver.setSuffix(".jsp");
+
+        // IMPORTANT: required in Spring Boot WAR deployment
+        resolver.setViewNames("*.jsp");
+
         return resolver;
     }
 }
-
