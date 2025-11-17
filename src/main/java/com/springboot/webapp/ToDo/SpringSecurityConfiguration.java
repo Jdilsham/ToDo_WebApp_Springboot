@@ -51,15 +51,22 @@ public class SpringSecurityConfiguration {
                         .frameOptions(frame -> frame.disable())
                 )
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/", "/login", "/perform_login", "/error",
-                                "/css/**", "/js/**", "/webjars/**")
-                        .permitAll()
+                        .requestMatchers(
+                                "/",
+                                "/login",
+                                "/perform_login",
+                                "/error",
+                                "/css/**",
+                                "/js/**",
+                                "/webjars/**",
+                                "/WEB-INF/jsp/**"
+                        ).permitAll()
                         .anyRequest().authenticated()
                 )
                 .formLogin(form -> form
                         .loginPage("/login")
                         .loginProcessingUrl("/perform_login")
-                        .defaultSuccessUrl("/welcome")
+                        .defaultSuccessUrl("/welcome", true)
                         .failureUrl("/login?error=true")
                         .permitAll()
                 )
@@ -71,7 +78,5 @@ public class SpringSecurityConfiguration {
 
         return http.build();
     }
-
-
 
 }

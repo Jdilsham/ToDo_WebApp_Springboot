@@ -22,7 +22,7 @@ public class ToDoControllerJpa {
     private TodoRepository todoRepository;
 
     @RequestMapping("list-todos")
-    public String listAllTotos(ModelMap model,
+    public String listAllTodos(ModelMap model,
                                org.springframework.security.core.Authentication authentication) {
 
         String username = authentication.getName();
