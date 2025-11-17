@@ -130,7 +130,7 @@
 <div class="welcome-box">
     <h1>Welcome 👋</h1>
     <p>Name: <strong>${username}</strong></p>
-    <a href="list-totos">Manage Your ToDos</a>
+    <a href="list-todos">Manage Your ToDos</a>
 </div>
 
 </body>
