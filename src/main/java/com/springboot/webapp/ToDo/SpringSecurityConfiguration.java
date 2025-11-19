@@ -59,7 +59,8 @@ public class SpringSecurityConfiguration {
                                 "/css/**",
                                 "/js/**",
                                 "/webjars/**",
-                                "/WEB-INF/jsp/**"
+                                "/WEB-INF/jsp/**",
+                                "/health"
                         ).permitAll()
                         .anyRequest().authenticated()
                 )

@@ -79,13 +79,14 @@ spec:
                   key: SPRING_MVC_VIEW_SUFFIX
           readinessProbe:
             httpGet:
-              path: /
+              path: /health
               port: 8080
             initialDelaySeconds: 20
             periodSeconds: 10
+
           livenessProbe:
             httpGet:
-              path: /
+              path: /health
               port: 8080
             initialDelaySeconds: 40
             periodSeconds: 20
