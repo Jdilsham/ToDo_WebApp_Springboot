@@ -19,31 +19,34 @@ spec:
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
+          resources:
+            requests:
+              cpu: 250m
+              memory: 512Mi
+            limits:
+              cpu: 500m
+              memory: 1Gi
           env:
             - name: SPRING_PROFILES_ACTIVE
               valueFrom:
                 configMapKeyRef:
                   name: backend-config
                   key: SPRING_PROFILES_ACTIVE
-
             - name: SPRING_JPA_HIBERNATE_DDL_AUTO
               valueFrom:
                 configMapKeyRef:
                   name: backend-config
                   key: SPRING_JPA_HIBERNATE_DDL_AUTO
-
             - name: SPRING_JPA_SHOW_SQL
               valueFrom:
                 configMapKeyRef:
                   name: backend-config
                   key: SPRING_JPA_SHOW_SQL
-
             - name: SPRING_JPA_DEFER_DATASOURCE_INITIALIZATION
               valueFrom:
                 configMapKeyRef:
                   name: backend-config
                   key: SPRING_JPA_DEFER_DATASOURCE_INITIALIZATION
-
             - name: SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT
               valueFrom:
                 configMapKeyRef:
@@ -52,13 +55,11 @@ spec:
 
             - name: SPRING_DATASOURCE_URL
               value: jdbc:mysql://mysql:3306/todo_db
-
             - name: SPRING_DATASOURCE_USERNAME
               valueFrom:
                 secretKeyRef:
                   name: mysql-secret
                   key: username
-
             - name: SPRING_DATASOURCE_PASSWORD
               valueFrom:
                 secretKeyRef:
@@ -76,3 +77,15 @@ spec:
                 configMapKeyRef:
                   name: backend-config
                   key: SPRING_MVC_VIEW_SUFFIX
+            readinessProbe:
+              httpGet:
+                path: /
+                port: 8080
+              initialDelaySeconds: 20
+              periodSeconds: 10
+            livenessProbe:
+              httpGet:
+                path: /
+                port: 8080
+              initialDelaySeconds: 40
+              periodSeconds: 20
