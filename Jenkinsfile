@@ -9,7 +9,7 @@ pipeline {
 
 	stages {
 
-		stage('Prepare Updated Deployment File') {
+		stage('Prepare Deployment File') {
 			steps {
 				script {
 					sh """
@@ -20,7 +20,7 @@ pipeline {
 			}
 		}
 
-		stage('Apply Kubernetes Manifests') {
+		stage('Deploy to GKE') {
 			steps {
 				script {
 					sh """
@@ -38,12 +38,17 @@ pipeline {
 			}
 		}
 
-		stage('Verify Deployment Status') {
+		stage('Verify Rollout') {
 			steps {
 				script {
 					sh "kubectl rollout status deployment/spring-todo-app -n ${NAMESPACE}"
 				}
 			}
 		}
+	}
+
+	post {
+		success { echo "Deployed successfully to GKE!" }
+		failure { echo "Deployment failed" }
 	}
 }
