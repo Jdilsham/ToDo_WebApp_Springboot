@@ -15,7 +15,7 @@ pipeline {
 					echo "Preparing deployment with image tag ${GIT_COMMIT}..."
 
 					sh """
-                        cp k8s/backend-deployment.yaml k8s/backend-deployment-temp.yaml
+                        cp k8s/spring-todo-deployment.yaml k8s/backend-deployment-temp.yaml
                         sed -i 's|IMAGE_TAG|${GIT_COMMIT}|g' k8s/backend-deployment-temp.yaml
                     """
 				}
@@ -34,7 +34,7 @@ pipeline {
                         kubectl apply -f k8s/mysql-deployment.yaml
                         kubectl apply -f k8s/mysql-service.yaml
                         kubectl apply -f k8s/backend-configmap.yaml
-                        kubectl apply -f k8s/backend-service.yaml
+                        kubectl apply -f k8s/spring-todo-service.yaml
                         kubectl apply -f k8s/ingress.yaml
 
                         kubectl apply -f k8s/backend-deployment-temp.yaml

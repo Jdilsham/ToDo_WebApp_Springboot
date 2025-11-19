@@ -4,8 +4,8 @@ metadata:
   name: mysql
   namespace: todo-app
 spec:
+  clusterIP: None
   ports:
     - port: 3306
   selector:
     app: mysql
-  clusterIP: None
